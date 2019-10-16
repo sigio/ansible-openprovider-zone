@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openXML>
+  <credentials>
+    <username>{{openprovider_username}}</username>
+{% if openprovider_pwhash is defined and openprovider_pwhash != "" %}
+    <hash>{{openprovider_pwhash}}</hash>
+{% else %}
+    <password>{{openprovider_password}}</password>
+{% endif %}
+  </credentials>
+  <modifyZoneDnsRequest>
+    <domain>
+      <name>{{zone.zonename}}</name>
+      <extension>{{zone.zoneext}}</extension>
+    </domain>
+    <records>
+      <array>
+{% for record in zone.records %}
+        <item>
+          <type>{{record.type}}</type>
+          <name>{{record.name}}</name>
+          <value>{{record.value}}</value>
+          <ttl>{{record.ttl|default(openprovider_default_ttl)}}</ttl>
+{% if record.prio is defined %}
+          <prio>{{record.prio}}</prio>
+{% endif %}
+        </item>
+{% endfor %}
+      </array>
+    </records>
+  </modifyZoneDnsRequest>
+</openXML>

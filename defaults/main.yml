@@ -1,0 +1,7 @@
+---
+
+openprovider_username: "your_openprovider_username"
+openprovider_password: "PLEASE USE THE HASH FUNCTION"
+openprovider_pwhash: "your password hash for the webapi"
+openprovider_api: https://api.openprovider.eu
+openprovider_default_ttl: "3600"

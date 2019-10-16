@@ -1,0 +1,13 @@
+---
+
+- name: Update OpenProvider Zones
+  uri:
+    url: "https://api.openprovider.eu"
+    method: "POST"
+    body: "{{lookup('template', 'op-update-zone.xml.j2')}}"
+    return_content: true
+    force: true
+  connection: local
+  with_items: "{{openprovider_zones}}"
+  loop_control:
+    loop_var: zone
